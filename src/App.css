@@ -1,0 +1,180 @@
+@font-face {
+  font-family: "Inter";
+  src: url("./assets/fonts/Inter/Inter-Italic.woff2") format("woff2"),
+    url("./assets/fonts/Inter/Inter-Italic.woff") format("woff");
+  font-weight: normal;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url("./assets/fonts/Inter/Inter-Regular.woff2") format("woff2"),
+    url("./assets/fonts/Inter/Inter-Regular.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Karla";
+  src: url("./assets/fonts/Karla/Karla-Italic.woff2") format("woff2"),
+    url("./assets/fonts/Karla/Karla-Italic.woff") format("woff");
+  font-weight: normal;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Karla";
+  src: url("./assets/fonts/Karla/Karla-Regular.woff2") format("woff2"),
+    url("./assets/fonts/Karla/Karla-Regular.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --border-radius: 20px;
+  --app-background: #f5f7fb;
+  --font-color: #293264;
+}
+
+body {
+  font-family: "Inter";
+  background-color: var(--app-background);
+  color: var(--font-color);
+}
+
+a {
+  color: var(--font-color);
+}
+
+h1 {
+  font-size: 4rem;
+}
+
+h1,
+h2 {
+  font-family: "Karla";
+}
+
+.Quiz {
+  position: relative;
+}
+
+.Quiz,
+.startScreen {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 1em;
+}
+
+.startScreen > form {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+  padding-top: 1em;
+}
+
+.Question {
+  border-bottom: 1px solid #d6dbf5;
+}
+
+fieldset {
+  border: none;
+  display: flex;
+  gap: 1em;
+}
+
+input {
+  display: none;
+}
+
+label {
+  font-weight: 600;
+  border: 1px solid var(--font-color);
+  border-radius: var(--border-radius);
+  padding: 0.5em 2em;
+  cursor: pointer;
+}
+
+label:has(input:checked) {
+  background-color: #d6dbf5;
+  border-color: #d6dbf5;
+  cursor: default;
+}
+
+.End label {
+  opacity: 50%;
+}
+
+.End label:has(input:checked) {
+  background-color: #f8bcbc;
+  border-color: #f8bcbc;
+}
+
+.End .correct,
+.End label.correct:has(input:checked) {
+  opacity: 100%;
+  background-color: #94d7a2;
+  border-color: #94d7a2;
+}
+
+.startScreen label {
+  padding: 0.5em;
+  height: 1em;
+  width: 1em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.button {
+  font-size: 1.2em;
+
+  border-radius: var(--border-radius);
+
+  padding: 0.7em 2em;
+  color: var(--app-background);
+  background-color: #4d5b9e;
+  border: none;
+  box-shadow: none;
+
+  cursor: pointer;
+}
+
+.closeQuiz {
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 100%;
+  border: solid 1px currentColor;
+  background-color: transparent;
+
+  width: 1em;
+  height: 1em;
+  padding: 1em;
+
+  cursor: pointer;
+}
+
+.startQuiz {
+  margin-top: 1em;
+  padding: 0.7em;
+  width: -webkit-fill-available;
+}
+
+.controls {
+  margin-top: 2em;
+  display: flex;
+  align-items: center;
+  gap: 1em;
+}
