@@ -75,30 +75,33 @@ export default function Quiz({ size, closeQuiz }) {
   }
 
   return (
-    <div className={`Quiz ${quizActive ? "" : "End"}`}>
-      <button className="closeQuiz" onClick={closeQuiz}>
-        X
-      </button>
-      {score == size && <Confetti />}
-      {quiz && <form>{listQuestions}</form>}
+    <>
+      {score == size && !quizActive && <Confetti />}
+      <div className={`Quiz ${quizActive ? "" : "End"}`}>
+        <button className="closeQuiz" onClick={closeQuiz}>
+          X
+        </button>
 
-      {quizActive ? (
-        <div className="controls">
-          <button className="button" onClick={() => setQuizActive(false)}>
-            Check answers
-          </button>
-        </div>
-      ) : (
-        <div className="controls">
-          <p>
-            You scored {score}/{size} correct answers
-          </p>
-          <button className="button" onClick={() => setRestarting(true)}>
-            Play again
-          </button>
-        </div>
-      )}
-    </div>
+        {quiz && <form>{listQuestions}</form>}
+
+        {quizActive ? (
+          <div className="controls">
+            <button className="button" onClick={() => setQuizActive(false)}>
+              Check answers
+            </button>
+          </div>
+        ) : (
+          <div className="controls">
+            <p>
+              You scored {score}/{size} correct answers
+            </p>
+            <button className="button" onClick={() => setRestarting(true)}>
+              Play again
+            </button>
+          </div>
+        )}
+      </div>
+    </>
   );
 }
 
