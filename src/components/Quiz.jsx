@@ -9,6 +9,9 @@ export default function Quiz({ size, closeQuiz }) {
   const [quizActive, setQuizActive] = useState(true);
   const [score, setScore] = useState(0);
   const [restarting, setRestarting] = useState(false);
+  // Something I saw someone else do was use this ☝️ state to trigger useEffect, reguardless of
+  // its value. I wonder if that's good or not? I prefer explicit values, so I specify and control
+  // the state completely.
 
   useEffect(() => {
     // Restart quiz
