@@ -15,7 +15,7 @@ export default function Question({ questionData, quizActive, handleChange }) {
   const choices =
     type === "multiple"
       ? [
-          <label key={correct_answer} className={!quizActive && "correct"}>
+          <label key={correct_answer} className={!quizActive ? "" : "correct"}>
             <input
               type="radio"
               value={correct_answer}
