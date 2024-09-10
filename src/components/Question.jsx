@@ -17,7 +17,7 @@ export default function Question({ questionData, quizActive, handleChange }) {
       ? [
           <label
             key={correct_answer}
-            className={!quizActive ? null : "correct"}
+            className={!quizActive ? "correct" : null}
           >
             <input
               type="radio"
