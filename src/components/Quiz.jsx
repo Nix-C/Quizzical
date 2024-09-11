@@ -40,18 +40,19 @@ export default function Quiz({ size, closeQuiz }) {
   }, [size, restarting, quiz]);
 
   const handleSubmit = () => {
-    // Tally correct answers
-    let correct = 0;
     if (quiz) {
-      for (let i = 0; i < quiz.length; i++) {
-        if (quiz[i].user_answer === quiz[i].correct_answer) {
-          correct++;
-        }
-      }
+      // Tally correct answers using .reduce method! (per Justin)
+      const correct = quiz.reduce(
+        (
+          acc,
+          question // acc == accumulator
+        ) => (question.user_answer === question.correct_answer ? acc + 1 : acc), // comparison logic
+        0 // initial value
+      );
+
+      setScore(correct);
+      setQuizActive(false);
     }
-    // Set score and end quiz
-    setScore(correct);
-    setQuizActive(false);
   };
 
   const listQuestions = quiz?.map((question) => (
