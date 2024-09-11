@@ -45,7 +45,7 @@ function App() {
               <input
                 type="radio"
                 name="size"
-                id="size"
+                id="size-3"
                 checked={size == 3}
                 onChange={(e) => {
                   setSize(e.target.value);
@@ -58,7 +58,7 @@ function App() {
               <input
                 type="radio"
                 name="size"
-                id="size"
+                id="size-5"
                 checked={size == 5}
                 onChange={(e) => {
                   setSize(e.target.value);
@@ -71,7 +71,7 @@ function App() {
               <input
                 type="radio"
                 name="size"
-                id="size"
+                id="size-8"
                 checked={size == 8}
                 onChange={(e) => {
                   setSize(e.target.value);
