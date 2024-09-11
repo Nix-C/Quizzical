@@ -39,7 +39,8 @@ export default function Quiz({ size, closeQuiz }) {
     }
   }, [size, restarting, quiz]);
 
-  useEffect(() => {
+  const handleSubmit = () => {
+    // Tally correct answers
     let correct = 0;
     if (quiz) {
       for (let i = 0; i < quiz.length; i++) {
@@ -48,9 +49,10 @@ export default function Quiz({ size, closeQuiz }) {
         }
       }
     }
-
+    // Set score and end quiz
     setScore(correct);
-  }, [quiz]);
+    setQuizActive(false);
+  };
 
   const listQuestions = quiz?.map((question) => (
     <Question
@@ -89,7 +91,7 @@ export default function Quiz({ size, closeQuiz }) {
 
         {quizActive ? (
           <div className="controls">
-            <button className="button" onClick={() => setQuizActive(false)}>
+            <button className="button" onClick={handleSubmit}>
               Check answers
             </button>
           </div>
