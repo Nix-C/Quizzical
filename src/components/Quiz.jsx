@@ -8,36 +8,28 @@ export default function Quiz({ size, closeQuiz }) {
   const [quiz, setQuiz] = useState();
   const [quizActive, setQuizActive] = useState(true);
   const [score, setScore] = useState(0);
-  const [restarting, setRestarting] = useState(false);
-  // Something I saw someone else do was use this ☝️ state to trigger useEffect, reguardless of
-  // its value. I wonder if that's good or not? I prefer explicit values, so I specify and control
-  // the state completely.
 
-  useEffect(() => {
-    // Restart quiz
-    if (restarting === true) {
-      setScore(0);
-      setQuizActive(true);
-      setRestarting(false);
-    }
+  const getQuiz = (size) => {
+    console.log("Getting quiz data");
+    const URL = `https://opentdb.com/api.php?amount=${size}`;
+    fetch(URL)
+      .then((res) => res.json())
+      .then((data) => {
+        setQuiz(
+          data.results?.map((result) => ({
+            ...result,
+            user_answer: null,
+            order: randomOrder(),
+          }))
+        );
+      });
+  };
 
-    // Light debouncing logic
-    if (!quiz || restarting) {
-      // Get quiz question from opentdb
-      const URL = `https://opentdb.com/api.php?amount=${size}`;
-      fetch(URL)
-        .then((res) => res.json())
-        .then((data) => {
-          setQuiz(
-            data.results?.map((result) => ({
-              ...result,
-              user_answer: null,
-              order: randomOrder(),
-            }))
-          );
-        });
-    }
-  }, [size, restarting, quiz]);
+  const handleRestart = (size) => {
+    setScore(0);
+    getQuiz(size);
+    setQuizActive(true);
+  };
 
   const handleSubmit = () => {
     if (quiz) {
@@ -55,16 +47,7 @@ export default function Quiz({ size, closeQuiz }) {
     }
   };
 
-  const listQuestions = quiz?.map((question) => (
-    <Question
-      key={question.question}
-      questionData={question}
-      quizActive={quizActive}
-      handleChange={handleChange}
-    />
-  ));
-
-  function handleChange(event) {
+  const handleChange = (event) => {
     const { name, value } = event.target;
 
     setQuiz((oldQuiz) => {
@@ -78,7 +61,19 @@ export default function Quiz({ size, closeQuiz }) {
         return question;
       });
     });
-  }
+  };
+
+  const listQuestions = quiz?.map((question) => (
+    <Question
+      key={question.question}
+      questionData={question}
+      quizActive={quizActive}
+      handleChange={handleChange}
+    />
+  ));
+
+  // init quiz
+  useEffect(() => getQuiz(size), []);
 
   return (
     <>
@@ -101,7 +96,7 @@ export default function Quiz({ size, closeQuiz }) {
             <p>
               You scored {score}/{size} correct answers
             </p>
-            <button className="button" onClick={() => setRestarting(true)}>
+            <button className="button" onClick={() => handleRestart(size)}>
               Play again
             </button>
           </div>
